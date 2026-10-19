@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tacit"
+version = "0.1.0"
+description = "Surface the rules nobody wrote down, then compile them into the agent."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "zysen1" }]
+keywords = ["fde", "business-rules", "mcp", "agents"]
+dependencies = [
+  "duckdb>=1.1",
+  "pandas>=2.2",
+  "pyyaml>=6",
+  "sqlglot>=26",
+  "pypdf>=5",
+  "fastmcp>=2",
+  "jinja2>=3.1",
+  "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+tacit = "tacit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
